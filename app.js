@@ -36,12 +36,11 @@ function handler(req, res){
 };
 
 io.sockets.on('connection', function(socket){
-	console.log(socket);
+	//console.log(socket);
 	socket.broadcast.emit('user_connect', {hello: 'world'});
 
 	socket.on('message', function(data){
 		console.log(data);
-		var url = "http://api.espn.com/v1/now/top?limit=3&apikey=fvqzfcccn6cfztsd3pcku949";
-		socket.broadcast.emit('message', {data: url});
+		socket.broadcast.emit('message', {message: data.data});
 	});
 });
